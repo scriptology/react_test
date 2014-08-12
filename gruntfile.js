@@ -32,30 +32,29 @@ module.exports = function(grunt) {
 //        },
 
         react: {
-          single_file_output: {
-            files: {
-              'path/to/output/dir/output.js': 'path/to/jsx/templates/dir/input.jsx'
-            }
-          },
+          //single_file_output: {
+          //  files: {
+          //    'static/work/temp/comment.js': 'static/work/jsx/comment.jsx'
+          //  }
+          //}
           combined_file_output: {
             files: {
-              'path/to/output/dir/combined.js': [
-                'static/work/jsx/input1.jsx',
-                'static/work/jsx/input2.jsx'
+              'static/work/temp/comment.js': [
+                '/Users/ASolovyev@dir.condenast.ru/Documents/storm/react_test/static/work/jsx/comment.jsx' 
               ]
             }
-          },
-          dynamic_mappings: {
-            files: [
-              {
-                expand: true,
-                cwd: 'path/to/jsx/templates/dir',
-                src: ['**/*.jsx'],
-                dest: 'path/to/output/dir',
-                ext: '.js'
-              }
-            ]
           }
+          //dynamic_mappings: {
+          //  files: [
+          //    {
+          //      expand: true,
+          //      cwd: 'path/to/jsx/templates/dir',
+          //      src: ['**/*.jsx'],
+          //      dest: 'path/to/output/dir',
+          //      ext: '.js'
+          //    }
+          //  ]
+          //}
         },
 
         browserify: {
