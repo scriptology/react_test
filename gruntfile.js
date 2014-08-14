@@ -31,44 +31,39 @@ module.exports = function(grunt) {
 //            }
 //        },
 
-        react: {
-          //single_file_output: {
-          //  files: {
-          //    'static/work/temp/comment.js': 'static/work/jsx/comment.jsx'
-          //  }
-          //}
-          combined_file_output: {
-            files: {
-              'static/work/temp/comment.js': [
-                '/Users/ASolovyev@dir.condenast.ru/Documents/storm/react_test/static/work/jsx/comment.jsx' 
-              ]
-            }
-          }
-          //dynamic_mappings: {
-          //  files: [
-          //    {
-          //      expand: true,
-          //      cwd: 'path/to/jsx/templates/dir',
-          //      src: ['**/*.jsx'],
-          //      dest: 'path/to/output/dir',
-          //      ext: '.js'
-          //    }
-          //  ]
-          //}
-        },
+        //react: {
+        //  //single_file_output: {
+        //  //  files: {
+        //  //    'static/work/temp/comment.js': 'static/work/jsx/comment.jsx'
+        //  //  }
+        //  //}
+        //  //combined_file_output: {
+        //  //  files: {
+        //  //    'static/work/temp/comment.js': [
+        //  //      'static/work/jsx/*.jsx'
+        //  //    ]
+        //  //  }
+        //  //}
+        //  dynamic_mappings: {
+        //    files: [
+        //      {
+        //        expand: false,
+        //        cwd: 'static/work/jsx/',
+        //        src: ['*.jsx'],
+        //        dest: 'static/work/temp/',
+        //        ext: '.js'
+        //      }
+        //    ]
+        //  }
+        //},
 
         browserify: {
             options: {
-                transform:
-                    [ require('grunt-react').browserify ]
+                transform: [ require('grunt-react').browserify ]
             },
-            app: {
-                src: [
-                    'static/work/lib/react.js',
-                    'static/work/js/**/*.js',
-                    'static/work/js/**/***.js'
-                ],
-                dest: 'static/work/tmp/scripts.js'
+            client: {
+                src: ['static/work/jsx/*.jsx'],
+                dest: 'static/work/temp/app.built.js'
             }
         },
 
@@ -145,16 +140,16 @@ module.exports = function(grunt) {
         */
 
         watch: {
-//            scripts: {
-//                files: [
-//                    'static/work/js/*.js',
-//                    'static/work/js/**/*.js'
-//                ],
-//                tasks: ['jshint', 'concat', 'uglify'],
-//                options: {
-//                    spawn: false
-//                }
-//            },
+            scripts: {
+                files: [
+                    'static/work/jsx/*.jsx',
+                    'static/work/**/*.jsx'
+                ],
+                tasks: ['browserify'],
+                options: {
+                    spawn: false
+                }
+            },
             sass: {
                 files: ['static/work/sass/*.sass'],
                 tasks: ['compass'],
@@ -208,5 +203,5 @@ module.exports = function(grunt) {
     //grunt.loadNpmTasks('browserify');
 
     // Задача по умолчанию
-    grunt.registerTask('default', ['compass', 'react', 'concat_css', 'watch']);
+    grunt.registerTask('default', ['compass', 'browserify', 'concat_css', 'watch']);
 };
